@@ -44,12 +44,6 @@
          drakma:*text-content-types*
          :test 'equal)
 
-(defun uri ()
-  "Construct the endpoint out of the configuration"
-  (let ((host (getf *config* :host))
-        (port (getf *config* :port)))
-    (format nil "~A~@[:~A~]" host port)))
-
 (defparameter *default-config*
   '(;; the default local RPC endpoint
     :host "http://localhost"
@@ -62,6 +56,12 @@ you will not need to change this values.")
 
 (defvar *config* *default-config*
   "The config being used by the wrapper")
+
+(defun uri ()
+  "Construct the endpoint out of the configuration"
+  (let ((host (getf *config* :host))
+        (port (getf *config* :port)))
+    (format nil "~A~@[:~A~]" host port)))
 
 (defun modify-config (key value)
   (setf (getf *config* key)
